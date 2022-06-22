@@ -1,0 +1,75 @@
+// html {
+//     margin: 0;
+//     height: 100%;
+//     // font-size: 100px;
+//     // line-height: 1;
+//     -webkit-text-size-adjust: 100%;
+//     -moz-user-select: none; // 禁止复制
+//     -ms-user-select: none;
+//     user-select: none;
+//     -webkit-user-select: none;
+//     -webkit-tap-highlight-color: transparent; // 去除ios点击高亮
+//     background: #f4f5f6;
+// }
+// body {
+//     margin: 0;
+//     height: 100%;
+//     background: #f4f5f6;
+// }
+
+// *,
+// ::after,
+// ::before {
+//     -webkit-tap-highlight-color: transparent;
+//     // -moz-user-focus: none;
+//     // -webkit-appearance: none;
+//     // outline: none;
+//     // border: none;
+//     margin: 0;
+//     padding: 0;
+// }
+
+// //html的img的src为空处理，避免谷歌浏览器有边框
+// img[src=''],
+// img[src='null'],
+// img:not([src]) {
+//     opacity: 0;
+// }
+// .btn {
+//     position: relative;
+//     line-height: normal;
+//     border: none;
+//     outline: 0;
+//     color: #fff;
+//     background: 0 0;
+//     box-shadow: none;
+//     text-align: center;
+//     -webkit-appearance: none;
+//     white-space: nowrap;
+//     box-sizing: border-box;
+// }
+
+// .btn::after {
+//     border: none;
+// }
+
+// input,
+// textarea {
+//     outline: none;
+//     background: transparent;
+//     border: none;
+//     outline: medium;
+// }
+
+// *:focus {
+//     outline: none;
+//     background-color: transparent;
+// }
+
+// ::selection {
+//     background: transparent;
+// }
+
+// ::-moz-selection {
+//     background: transparent;
+// }
