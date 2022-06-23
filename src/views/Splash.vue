@@ -5,9 +5,9 @@
             <!-- <p>赣商动力</p> -->
         </div>
         <div class="ad" v-if="ad">
-            <img :src="ad.photo" @click="adClick()" />
+            <img :src="ad.photo" @click="adClick" />
 
-            <div class="time" @click.stop="jumpNext()">
+            <div class="time" @click.stop="jumpNext">
                 <span>{{ current }}</span>
                 <span>跳过</span>
             </div>
@@ -96,6 +96,7 @@ function disposeConfig() {
 function jumpNext() {
     proxy.$router.replace('/home')
 }
+function adClick() {}
 </script>
 <style lang="scss" scoped>
 .container {

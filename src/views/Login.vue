@@ -27,7 +27,7 @@
                 />
                 <div></div>
 
-                <div class="captcha-btn" @click.prevent="getCaptcha()">
+                <div class="captcha-btn" @click.prevent="getCaptcha">
                     <span v-show="!captchaConfig.counting">获取验证码</span>
                     <div v-show="captchaConfig.counting">
                         重发(<van-count-down
@@ -46,7 +46,7 @@
             <span>未注册的手机号码验证后自动注册</span>
             <!-- <span (click)="switchMode()">{{ isAccountMode ? '手机号码登录' : '账号密码登录' }}</span> -->
         </div>
-        <button class="next btn btn-lg btn-gradient" @click="login()">登录 / 注册</button>
+        <button class="next btn btn-lg btn-gradient" @click="login">登录 / 注册</button>
         <div class="agreement-block"></div>
         <div class="agreement">
             <!-- <img (click)="agreementClick()" [src]="isAgree ? spa('common/icon_check_on.png') : spa('common/icon_check_off.png')" /> -->

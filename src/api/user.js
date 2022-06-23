@@ -1,4 +1,5 @@
 import http from '../utils/http/httpclient'
+import pictureService from '../utils/picture-service'
 
 let { get, post, getOriginal } = http
 export const refreshToken = (token) =>
@@ -135,7 +136,7 @@ export const convertAccount = (result) => {
         name: user.name,
         sex: user.sex,
         birthday: user.birthday,
-        photo: user.photo,
+        photo: pictureService.getPicture(user.photo, { width: 120 }),
         photoOriginal: user.photo,
         mobile: user.mobile,
         captcha: user.captcha,
