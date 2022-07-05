@@ -32,14 +32,16 @@ axios.defaults.timeout = 15000
 axios.interceptors.request.use(
     (config) => {
         // 在发送请求之前做些什么
-        // console.log('interceptors request', config)
+        console.log('interceptors request', config)
         let url = config.url
         let token = storage.get('token')
         // console.log(token)
-        if (checkNeedToken(url) && token) {
-            config.headers['Authorization'] = `${token.token_type} ${token.access_token}`
-        } else {
-            config.headers['Authorization'] = `basic ${authorization}`
+        if (!config.headers['x-cos-security-token']) {
+            if (checkNeedToken(url) && token) {
+                config.headers['Authorization'] = `${token.token_type} ${token.access_token}`
+            } else {
+                config.headers['Authorization'] = `basic ${authorization}`
+            }
         }
         return config
     },

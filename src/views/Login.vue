@@ -71,6 +71,19 @@ const { proxy } = getCurrentInstance()
 let hideBack = false
 let is401 = false
 let toHome = false
+
+const phone = ref('')
+const captcha = ref('')
+const captchaConfig = reactive({
+    sending: false,
+    counting: false,
+    disabled: false,
+})
+
+const mobileFocus = ref(false)
+const captchaFocus = ref(false)
+const countDown = ref(null)
+
 defineProps({})
 onMounted(() => {
     console.log(proxy)
@@ -84,18 +97,18 @@ onMounted(() => {
     } catch (error) {
         console.log(error)
     }
-})
-const phone = ref('')
-const captcha = ref('')
-const captchaConfig = reactive({
-    sending: false,
-    counting: false,
-    disabled: false,
-})
 
-const mobileFocus = ref(false)
-const captchaFocus = ref(false)
-const countDown = ref(null)
+    proxy.$storage.remove('token')
+    proxy.$storage.remove('currentAccount')
+    if (is401) {
+        Toast('登录已过期')
+    }
+
+    let lastLoginPhone = proxy.$storage.get('lastLoginPhone')
+    if (lastLoginPhone) {
+        phone.value = lastLoginPhone
+    }
+})
 
 const navbarBack = () => {
     history.back()

@@ -38,6 +38,14 @@ export const logout = () => get('/gateway/api/logout', {})
 
 export const getAccountSummary = () => post('/platform/api/wallet/account/getAccountSummaryResult', {})
 
+export const complete = (name, sex, birthday, photo) =>
+    post('/platform/api/member/user/complete', {
+        name: name,
+        sex: sex,
+        birthday: birthday,
+        photo: photo,
+    })
+
 export const convertAccount = (result) => {
     let user = result.user
     let person = result.person

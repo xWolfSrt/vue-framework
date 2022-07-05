@@ -2,7 +2,7 @@ import config from '../config'
 /**
  * 使用方式
  * * * main.js挂载全局
- *  import storage from './utils/storage';
+ *  import storage from './utils/localstorage';
     const app = createApp(App);
     app.config.globalProperties.$storage = storage;
  * * * vue3.0 全局使用 vue实例上的数据
