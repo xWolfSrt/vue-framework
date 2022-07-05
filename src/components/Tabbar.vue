@@ -1,9 +1,8 @@
 <template>
-    <div class="container">
+    <div class="zw-tabbar-container">
         <div class="zw-tabbar-item" v-for="(tab, index) in tabs" :key="index" @click="tabClick(tab.code)">
             <div class="normal">
                 <img :src="currentCode == tab.code ? tab.selectedIcon : tab.icon" />
-                <!-- <img src="../assets/images/tab/icon_tab_main_selected.png" /> -->
                 <span :class="currentCode == tab.code ? 'selected' : ''">{{ tab.name }}</span>
             </div>
         </div>
@@ -74,7 +73,7 @@ const tabClick = (code) => {
 }
 </script>
 <style lang="scss" scoped>
-.container {
+.zw-tabbar-container {
     position: fixed;
     bottom: 0;
     z-index: 99999;

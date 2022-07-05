@@ -6,8 +6,11 @@ import router from '../../router'
 
 let domain = window.location.origin
 let isTest = true
-let defaultDomain = 'https://debug.lianma.tech'
-let authorization = 'Y293eC1tYWxsLWIyYy1jb25zdW1lci1waG9uZS13ZWI6ZjE4ZjcxZTktODg4NC00NDE2LTllNWEtMmM3MDk5YzI5MTJi' //h5
+let defaultDomain = 'https://release.gsdl.top'
+let authorization = 'Y293eC1nc21oLWNvbnN1bWVyLWZvcmVncm91bmQtd2ViOjg4ZTI0ZjhjLWIyOGMtNGM0OS1hYjYzLWJjNzllYjM2MTdhOA==' //h5 赣商动力
+
+//请求接口需要登录权限的列表
+const list = ['member/user/complete', 'logout', 'api/wallet/account/getAccountSummaryResult', 'api/gsmh/home/fetch']
 
 axios.defaults.baseURL = isTest ? defaultDomain : domain
 // 请求头，headers 信息
@@ -24,8 +27,6 @@ axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*'
 
 //设置超时
 axios.defaults.timeout = 15000
-
-const list = ['api/wallet/account/getAccountSummaryResult']
 
 // 添加请求拦截器
 axios.interceptors.request.use(

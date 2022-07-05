@@ -3,18 +3,18 @@ import pictureService from '../utils/picture-service'
 
 let { get, post, getOriginal } = http
 export const refreshToken = (token) =>
-    get('/live/api/refresh', {
+    get('/gateway/api/refresh', {
         token: token,
     })
 
 //发送验证码
 export const sendCaptcha = (phone) =>
-    getOriginal('/live/api/verification/sms/fetch', {
+    getOriginal('/gateway/api/verification/sms/fetch', {
         account: phone,
         token: phone,
     })
 export const validateCaptcha = (phone, captcha) =>
-    get('/live/api/verification/sms/validate', {
+    get('/gateway/api/verification/sms/validate', {
         account: phone,
         code: captcha,
         token: phone,
@@ -24,7 +24,7 @@ export const registerOrLogin = (phone, captcha) => {
     let reg = /(\d{3})\d{4}(\d{4})/
     let secretPhone = phone.replace(reg, '$1****$2')
 
-    return get('/live/api/register/sms', {
+    return get('/gateway/api/register/sms', {
         account: phone,
         code: captcha,
         mobile: phone,
@@ -34,8 +34,9 @@ export const registerOrLogin = (phone, captcha) => {
         token: phone,
     })
 }
+export const logout = () => get('/gateway/api/logout', {})
 
-export const getAccountSummary = () => post('/live/api/wallet/account/getAccountSummaryResult', {})
+export const getAccountSummary = () => post('/platform/api/wallet/account/getAccountSummaryResult', {})
 
 export const convertAccount = (result) => {
     let user = result.user

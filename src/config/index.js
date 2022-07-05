@@ -14,6 +14,7 @@ const envConfig = {
 }
 export default {
     namespace: 'live',
+    contactPhone: '400-000-0001',
     env,
     ...envConfig,
 }

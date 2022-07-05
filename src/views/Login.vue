@@ -1,4 +1,5 @@
 <template>
+    <Navbar :canback="hideBack" :bg="'transparent'" :dark="false" @navbarBack="navbarBack"></Navbar>
     <div class="container">
         <div class="title-text">
             <img src="../assets/images/icon_logo_2.png" />
@@ -63,6 +64,7 @@
 import { ref, reactive, getCurrentInstance, onMounted } from 'vue'
 import { Toast } from 'vant'
 import { sendCaptcha, validateCaptcha, registerOrLogin, getAccountSummary, convertAccount } from '../api/user'
+import Navbar from '../components/Navbar.vue'
 
 const { proxy } = getCurrentInstance()
 
@@ -95,6 +97,9 @@ const mobileFocus = ref(false)
 const captchaFocus = ref(false)
 const countDown = ref(null)
 
+const navbarBack = () => {
+    history.back()
+}
 function focusInput(type, focus) {
     if (type == 'mobile') mobileFocus.value = focus
     else captchaFocus.value = focus
