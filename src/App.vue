@@ -1,24 +1,39 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-</script>
-
 <template>
-    <router-view></router-view>
+    <!-- <router-view v-slot="{ Component }">
+        <keep-alive :include="keepAlive">
+            <component :is="Component" />
+        </keep-alive>
+    </router-view> -->
+
+    <router-view v-slot="{ Component, route }">
+        <keep-alive :include="keepAlive">
+            <component :is="Component" :key="route.fullPath" />
+        </keep-alive>
+    </router-view>
 </template>
+<script setup>
+import { ref, reactive, getCurrentInstance } from 'vue'
+const { proxy } = getCurrentInstance()
 
-<style>
-#app {
-    /* font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px; */
-}
-
+const keepAlive = reactive(['Home', 'Personal'])
+</script>
+<style lang="scss">
 html,
 body {
     background: #f4f5f6;
+}
+
+.view-enter-active {
+    animation: view-ani var(--el-transition-duration);
+}
+
+.view-leave-active {
+    animation: view-ani reverse var(--el-transition-duration);
+}
+
+@keyframes view-ani {
+    from {
+        opacity: 0;
+    }
 }
 </style>
