@@ -264,7 +264,7 @@ const post = (url, data, callback) => {
                     { type: 'POST', url: url, data: data },
                     {
                         msg: (error && error.error) || (error && error.name && error.name == 'TimeoutError' && '请求超时') || '网络异常',
-                        status: error && error.status,
+                        status: error && error.response && error.response.status,
                     }
                 )
             })
@@ -300,7 +300,7 @@ const get = (url, data, callback) => {
                     { type: 'GET', url: url, data: data },
                     {
                         msg: (error && error.error) || (error && error.name && error.name == 'TimeoutError' && '请求超时') || '网络异常',
-                        status: error && error.status,
+                        status: error && error.response && error.response.status,
                     }
                 )
             })
