@@ -1,21 +1,32 @@
 <template>
-    <!-- <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component, route }">
+        <!-- <component :is="Component" :key="route.fullPath" /> -->
         <keep-alive :include="keepAlive">
             <component :is="Component" />
         </keep-alive>
-    </router-view> -->
-
-    <router-view v-slot="{ Component, route }">
-        <keep-alive :include="keepAlive">
-            <component :is="Component" :key="route.fullPath" />
-        </keep-alive>
     </router-view>
+    <!-- <router-view></router-view> -->
 </template>
 <script setup>
-import { ref, reactive, getCurrentInstance } from 'vue'
+import { ref, reactive, getCurrentInstance, onMounted } from 'vue'
+import config from './config'
 const { proxy } = getCurrentInstance()
 
-const keepAlive = reactive(['Home', 'Personal'])
+const keepAlive = reactive(['Home', 'Live', 'Personal', 'PersonalSettings'])
+
+onMounted(() => {
+    initHost()
+})
+
+const initHost = () => {
+    console.log('initHost', document.location, window.location)
+    let domain = window.location.origin
+
+    if (config.isTest) {
+        domain = config.defaultDomain
+    }
+    proxy.$storage.set('host', domain)
+}
 </script>
 <style lang="scss">
 html,

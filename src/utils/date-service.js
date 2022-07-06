@@ -1,3 +1,12 @@
+const test = () => {
+    // import dateService from '../../utils/date-service'
+    let date = new Date()
+    let date1 = '2022-07-04 20:30:11'
+    console.log(dateService.format(date, 'yyyy-MM-dd HH:mm'))
+    console.log(dateService.convert(date1))
+    console.log(dateService.format(dateService.convert(date1), 'HH:mm'))
+}
+
 export default {
     //fmt 格式  "yyyy-MM-dd HH:mm:ss"  "yyyy-MM-dd"
 

@@ -5,12 +5,11 @@
             <component :is="Component" />
         </keep-alive>
     </router-view>
-    <!-- <router-view></router-view> -->
 </template>
 <script setup>
 import { ref, reactive, getCurrentInstance } from 'vue'
 const { proxy } = getCurrentInstance()
 
-const keepAlive = reactive(['PersonalSettings'])
+const keepAlive = reactive(['Home'])
 </script>
 <style lang="scss" scoped></style>

@@ -1,18 +1,16 @@
 import axios from 'axios'
 import storage from '../localstorage'
 import router from '../../router'
-
+import config from '../../config'
 // axios.defaults.baseURL = ''  //正式
 
-let domain = window.location.origin
-let isTest = true
-let defaultDomain = 'https://release.gsdl.top'
+let domain = storage.get('host')
 let authorization = 'Y293eC1nc21oLWNvbnN1bWVyLWZvcmVncm91bmQtd2ViOjg4ZTI0ZjhjLWIyOGMtNGM0OS1hYjYzLWJjNzllYjM2MTdhOA==' //h5 赣商动力
 
 //请求接口需要登录权限的列表
 const list = ['member/user/complete', 'logout', 'api/wallet/account/getAccountSummaryResult', 'api/gsmh/home/fetch']
 
-axios.defaults.baseURL = isTest ? defaultDomain : domain
+axios.defaults.baseURL = config.isTest ? config.defaultDomain : domain
 // 请求头，headers 信息
 axios.defaults.headers['Content-Type'] = 'application/json'
 axios.defaults.headers['Authorization'] = `basic ${authorization}`

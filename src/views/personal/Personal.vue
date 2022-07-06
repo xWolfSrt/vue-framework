@@ -134,7 +134,14 @@ import PersonalItem from './PersonalItem.vue'
 import { getAccountSummary, convertAccount } from '../../api/user'
 
 const { proxy } = getCurrentInstance()
-
+const getGuid = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (Math.random() * 16) | 0,
+            v = c == 'x' ? r : (r & 0x3) | 0x8
+        return v.toString(16)
+    })
+}
+const guid = getGuid()
 let data = reactive({
     list: [],
     account: undefined,
@@ -143,6 +150,7 @@ const tabRefresh = () => {
     console.log('personal tabRefresh')
 }
 onMounted(() => {
+    console.log('personal onMounted')
     data.account = proxy.$storage.get('currentAccount')
     initList()
     getSummary()
