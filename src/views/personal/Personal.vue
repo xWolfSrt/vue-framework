@@ -131,7 +131,7 @@ import { Toast } from 'vant'
 import Tabbar from '../../components/Tabbar.vue'
 import getAssetsFile from '../../utils/pub-use'
 import PersonalItem from './PersonalItem.vue'
-import { getAccountSummary, convertAccount } from '../../api/user'
+import userService from '../../api/user'
 
 const { proxy } = getCurrentInstance()
 const getGuid = () => {
@@ -259,10 +259,11 @@ const getSummary = () => {
     if (!isLogin()) {
         return
     }
-    getAccountSummary()
+    userService
+        .getAccountSummary()
         .then((result) => {
             if (result) {
-                let account = convertAccount(result)
+                let account = userService.convertAccount(result)
                 proxy.$storage.set('currentAccount', account)
                 data.account = account
                 updateAccount()

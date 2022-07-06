@@ -2,7 +2,7 @@
     <router-view v-slot="{ Component, route }">
         <!-- <component :is="Component" :key="route.fullPath" /> -->
         <keep-alive :include="keepAlive">
-            <component :is="Component" />
+            <component :is="Component" :key="route.fullPath" />
         </keep-alive>
     </router-view>
     <!-- <router-view></router-view> -->

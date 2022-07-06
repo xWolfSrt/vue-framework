@@ -63,7 +63,7 @@
 <script setup>
 import { ref, reactive, getCurrentInstance, onMounted } from 'vue'
 import { Toast } from 'vant'
-import { sendCaptcha, validateCaptcha, registerOrLogin, getAccountSummary, convertAccount } from '../api/user'
+import userService from '../api/user'
 import Navbar from '../components/Navbar.vue'
 
 const { proxy } = getCurrentInstance()
@@ -133,7 +133,8 @@ function getCaptcha() {
     showLoading('正在发送...')
     captchaConfig.sending = true
 
-    sendCaptcha(phone.value)
+    userService
+        .sendCaptcha(phone.value)
         .then((result) => {
             console.log(result)
             switch (result.status) {
@@ -185,7 +186,8 @@ function login() {
         return
     }
     showLoading('正在登录')
-    validateCaptcha(phone.value, captcha.value)
+    userService
+        .validateCaptcha(phone.value, captcha.value)
         .then((result) => {
             console.log(result)
 
@@ -203,7 +205,8 @@ function login() {
         })
 }
 function phoneRegisterOrLogin() {
-    registerOrLogin(phone.value, captcha.value)
+    userService
+        .registerOrLogin(phone.value, captcha.value)
         .then((result) => {
             console.log(result)
             // let token = result
@@ -217,10 +220,11 @@ function phoneRegisterOrLogin() {
         })
 }
 function getAccount() {
-    getAccountSummary()
+    userService
+        .getAccountSummary()
         .then((result) => {
             if (result) {
-                let account = convertAccount(result)
+                let account = userService.convertAccount(result)
                 proxy.$storage.set('currentAccount', account)
                 registerSuccess()
             } else {

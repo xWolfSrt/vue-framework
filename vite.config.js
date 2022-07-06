@@ -6,6 +6,7 @@ import path from 'path'
 export default defineConfig({
     // 插件配置
     plugins: [vue()],
+    base: '/',
     //设置的别名
     resolve: {
         // 如果报错__dirname找不到，需要安装node,
@@ -47,6 +48,13 @@ export default defineConfig({
             compress: {
                 drop_console: true,
                 drop_debugger: true,
+            },
+        },
+        rollupOptions: {
+            output: {
+                chunkFileNames: 'static/js/[name]-[hash].js',
+                entryFileNames: 'static/js/[name]-[hash].js',
+                assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
             },
         },
     },

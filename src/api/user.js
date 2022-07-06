@@ -2,25 +2,26 @@ import http from '../utils/http/httpclient'
 import pictureService from '../utils/picture-service'
 
 let { get, post, getOriginal } = http
-export const refreshToken = (token) =>
+
+const refreshToken = (token) =>
     get('/gateway/api/refresh', {
         token: token,
     })
 
 //发送验证码
-export const sendCaptcha = (phone) =>
+const sendCaptcha = (phone) =>
     getOriginal('/gateway/api/verification/sms/fetch', {
         account: phone,
         token: phone,
     })
-export const validateCaptcha = (phone, captcha) =>
+const validateCaptcha = (phone, captcha) =>
     get('/gateway/api/verification/sms/validate', {
         account: phone,
         code: captcha,
         token: phone,
     })
 
-export const registerOrLogin = (phone, captcha) => {
+const registerOrLogin = (phone, captcha) => {
     let reg = /(\d{3})\d{4}(\d{4})/
     let secretPhone = phone.replace(reg, '$1****$2')
 
@@ -34,11 +35,11 @@ export const registerOrLogin = (phone, captcha) => {
         token: phone,
     })
 }
-export const logout = () => get('/gateway/api/logout', {})
+const logout = () => get('/gateway/api/logout', {})
 
-export const getAccountSummary = () => post('/platform/api/wallet/account/getAccountSummaryResult', {})
+const getAccountSummary = () => post('/platform/api/wallet/account/getAccountSummaryResult', {})
 
-export const complete = (name, sex, birthday, photo) =>
+const complete = (name, sex, birthday, photo) =>
     post('/platform/api/member/user/complete', {
         name: name,
         sex: sex,
@@ -46,7 +47,7 @@ export const complete = (name, sex, birthday, photo) =>
         photo: photo,
     })
 
-export const convertAccount = (result) => {
+const convertAccount = (result) => {
     let user = result.user
     let person = result.person
     let company = result.company
@@ -158,4 +159,15 @@ export const convertAccount = (result) => {
         auth: auth,
         direct: 0,
     }
+}
+
+export default {
+    refreshToken,
+    sendCaptcha,
+    validateCaptcha,
+    registerOrLogin,
+    logout,
+    getAccountSummary,
+    complete,
+    convertAccount,
 }

@@ -44,7 +44,7 @@ import Navbar from '../../components/Navbar.vue'
 import WebViewDialog from '../../components/WebViewDialog.vue'
 import getAssetsFile from '../../utils/pub-use'
 import config from '../../config'
-import { logout } from '../../api/user'
+import userService from '../../api/user'
 const { proxy } = getCurrentInstance()
 
 const count = ref(0)
@@ -72,7 +72,8 @@ const privacyPolicyClick = () => {
 }
 const loginOut = () => {
     showLoading('正在注销')
-    logout()
+    userService
+        .logout()
         .then((result) => {
             if (!result) {
                 Toast('注销失败')

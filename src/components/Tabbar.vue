@@ -36,12 +36,12 @@ const initTabbar = () => {
     itemLive.path = '/live'
     itemLive.code = 'live'
 
-    let itemCircle = {}
-    itemCircle.name = '点播'
-    itemCircle.icon = getAssetsFile('tab/icon_tab_video.png')
-    itemCircle.selectedIcon = getAssetsFile('tab/icon_tab_video_selected.png')
-    itemCircle.path = '/gssx'
-    itemCircle.code = 'gssx'
+    // let itemCircle = {}
+    // itemCircle.name = '点播'
+    // itemCircle.icon = getAssetsFile('tab/icon_tab_video.png')
+    // itemCircle.selectedIcon = getAssetsFile('tab/icon_tab_video_selected.png')
+    // itemCircle.path = '/gssx'
+    // itemCircle.code = 'gssx'
 
     let itemMine = {}
     itemMine.name = '我的'
@@ -52,7 +52,7 @@ const initTabbar = () => {
 
     tabs.push(itemMain)
     tabs.push(itemLive)
-    tabs.push(itemCircle)
+    // tabs.push(itemCircle)
     tabs.push(itemMine)
 }
 

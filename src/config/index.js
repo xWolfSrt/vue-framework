@@ -17,6 +17,7 @@ export default {
     contactPhone: '400-000-0001',
     isTest: true,
     defaultDomain: 'https://release.gsdl.top',
+    organization: 'a4c0acb5-c69d-11eb-b768-0c42a1039856',
     env,
     ...envConfig,
 }

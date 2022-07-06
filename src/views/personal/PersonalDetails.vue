@@ -37,7 +37,7 @@ import { ref, reactive, getCurrentInstance, onMounted, toRaw } from 'vue'
 import { Toast } from 'vant'
 import Navbar from '../../components/Navbar.vue'
 import getAssetsFile from '../../utils/pub-use'
-import { complete } from '../../api/user'
+import userService from '../../api/user'
 import pictureService from '../../utils/picture-service'
 import fileUpload from '../../utils/file/file-upload'
 const { proxy } = getCurrentInstance()
@@ -81,7 +81,8 @@ const modifyPhoto = (picture) => {
             }
         })
     }
-    complete(null, null, null, JSON.stringify(pictures))
+    userService
+        .complete(null, null, null, JSON.stringify(pictures))
         .then((result) => {
             if (!result) {
                 submitError()
