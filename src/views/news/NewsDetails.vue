@@ -401,13 +401,13 @@ const hideLoading = () => {
             padding: 22px 0 32px;
             text-align: justify;
 
-            ::v-deep ul {
+            :deep ul {
                 list-style: disc !important;
             }
-            ::v-deep ol {
+            :deep ol {
                 list-style: decimal !important;
             }
-            ::v-deep iframe {
+            :deep iframe {
                 width: 100%;
             }
         }

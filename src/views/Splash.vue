@@ -4,18 +4,21 @@
             <img src="../assets/images/icon_logo_2.png" />
             <!-- <p>赣商动力</p> -->
         </div>
-        <div class="ad" v-if="ad">
-            <img :src="ad.photo" @click="adClick" />
+        <div class="ad" v-if="data.ad">
+            <img :src="data.ad.photo" @click="adClick" />
 
             <div class="time" @click.stop="jumpNext">
-                <span>{{ current }}</span>
+                <span>{{ data.current }}</span>
                 <span>跳过</span>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { ref, reactive, onMounted, getCurrentInstance } from 'vue'
+import { ref, reactive, onMounted, getCurrentInstance, onUnmounted } from 'vue'
+import dateService from '../utils/date-service'
+import pictureService from '../utils/picture-service'
+
 const { proxy } = getCurrentInstance()
 
 onMounted(() => {
@@ -39,36 +42,39 @@ onMounted(() => {
         disposeConfig()
     }, 800)
 })
-const ad = reactive(null)
+const data = reactive({
+    ad: undefined,
+    current: 5,
+})
 
 const max = 5
-const current = ref(5)
-const inter = null
+let inter = null
 
 function disposeConfig() {
     let config = proxy.$storage.get('splash')
-    config = config && JSON.parse(config)
     let ads =
         config &&
         config.adFirst &&
         config.adFirst.filter((item) => {
             let now = new Date()
-            let start = item.start && this.dateService.convert(item.start)
-            let end = item.end && this.dateService.convert(item.end)
+            let start = item.start && dateService.convert(item.start)
+            let end = item.end && dateService.convert(item.end)
             let isExpire = false //不在时间范围内不显示
 
             if (start && end && (now.getTime() > end.getTime() || now.getTime() < start.getTime())) {
                 isExpire = true
             }
-            return item.enable && !isExpire
+            // return item.enable && !isExpire
+            //FIXME
+            return true
         })
 
     if (ads && ads.length > 0) {
         let list = ads
         let index = Math.floor(Math.random() * list.length) //随机取出一个
         let ad = list[index]
-        this.ad = {
-            photo: this.pictureService.compress(ad.photo, this.windowWidth, 0, true),
+        data.ad = {
+            photo: pictureService.compressPicture(ad.photo, { width: window.innerWidth }),
             android: ad.androidUri,
             ios: ad.iOSUri,
             url: ad.uri,
@@ -76,14 +82,14 @@ function disposeConfig() {
         }
 
         //倒计时
-        current = this.max
-        var t = this.max
+        data.current = max
+        let t = max
         inter = setInterval(() => {
-            current = t
+            data.current = t
 
             if (t <= 0) {
-                this.current = 0
-                this.jumpNext()
+                data.current = 0
+                jumpNext()
             }
             t--
         }, 1000)
@@ -93,10 +99,15 @@ function disposeConfig() {
         }, 50)
     }
 }
-function jumpNext() {
+const jumpNext = () => {
     proxy.$router.replace('/home')
 }
-function adClick() {}
+const adClick = () => {}
+onUnmounted(() => {
+    if (inter) {
+        clearInterval(inter)
+    }
+})
 </script>
 <style lang="scss" scoped>
 .container {

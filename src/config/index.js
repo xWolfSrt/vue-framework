@@ -13,7 +13,7 @@ const envConfig = {
     },
 }
 export default {
-    namespace: 'live',
+    namespace: 'gsdl',
     contactPhone: '400-000-0001',
     isTest: true,
     defaultDomain: 'https://release.gsdl.top',

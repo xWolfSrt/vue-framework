@@ -1468,15 +1468,15 @@ const initTestData = () => {
             height: 100%;
             border-radius: 0.04rem;
         }
-        ::v-deep .dplayer-setting {
+        :deep .dplayer-setting {
             display: none;
         }
 
-        ::v-deep .dplayer-full-icon {
+        :deep .dplayer-full-icon {
             display: none;
         }
 
-        ::v-deep .dplayer-bar-preview {
+        :deep .dplayer-bar-preview {
             visibility: hidden;
         }
 
