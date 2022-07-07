@@ -225,13 +225,22 @@ const itemClick = () => {
             align-items: center;
             height: 96px;
             overflow: hidden;
-            img {
+
+            div {
                 flex-shrink: 0;
                 height: 100%;
-                width: 32%;
+                width: 33%;
                 border-radius: 4px;
                 object-fit: cover;
                 margin: 0 0.33%;
+                display: flex;
+                img {
+                    flex-shrink: 0;
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 4px;
+                    object-fit: cover;
+                }
             }
         }
     }

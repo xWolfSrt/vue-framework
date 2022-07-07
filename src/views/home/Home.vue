@@ -17,142 +17,135 @@
             <p>门户暂未开通，请联系管理员</p>
         </div>
 
-        <div class="swiper-container-home-banner" v-if="data.banner">
-            <swiper
-                :modules="[Autoplay, A11y]"
-                :slides-per-view="1"
-                :space-between="0"
-                :autoplay="{ delay: 3000, stopOnLastSlide: false, disableOnInteraction: false }"
-                :loop="true"
-                @swiper="onBannerSwiper"
-                @slideChange="onBannerSlideChange"
-                @click="onBannerClick"
-            >
-                <swiper-slide v-for="(item, index) in data.banner" :key="index">
-                    <div class="banner-image">
-                        <img :src="item.photo" />
+        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+            <van-list v-model:loading="loading" :finished="finished" offset="150" finished-text="没有更多了" @load="onReachBottom">
+                <div class="swiper-container-home-banner" v-if="data.banner">
+                    <swiper
+                        :modules="[Autoplay, A11y]"
+                        :slides-per-view="1"
+                        :space-between="0"
+                        :autoplay="{ delay: 3000, stopOnLastSlide: false, disableOnInteraction: false }"
+                        :loop="true"
+                        @swiper="onBannerSwiper"
+                        @slideChange="onBannerSlideChange"
+                        @click="onBannerClick"
+                    >
+                        <swiper-slide v-for="(item, index) in data.banner" :key="index">
+                            <div class="banner-image">
+                                <img :src="item.photo" />
+                            </div>
+                        </swiper-slide>
+                    </swiper>
+                    <div class="custom-swiper-pagination">
+                        <div v-for="(item, i) in data.banner" :key="i" :class="{ selected: data.currentBanner == i }"></div>
                     </div>
-                </swiper-slide>
-            </swiper>
-            <div class="custom-swiper-pagination">
-                <div v-for="(item, i) in data.banner" :key="i" :class="{ selected: data.currentBanner == i }"></div>
-            </div>
-        </div>
-
-        <div class="module">
-            <div class="module-cell" v-for="(item, index) in data.modules" :key="index" @click="moduleClick(item)">
-                <img :src="item.icon" />
-                <span>{{ item.name }}</span>
-            </div>
-        </div>
-
-        <div class="hot" v-if="data.adHot">
-            <div class="part-head">
-                <div></div>
-                <span>赣动热点</span>
-            </div>
-            <div class="hot-video-container" :style="{ height: data.hotVideoHeight }" id="hotvideocontainer">
-                <div id="video_hot" style="flex-shrink: 0" ref="hotplayer"></div>
-
-                <div class="video-full-back" v-if="data.temp.isFullScreen">
-                    <img :src="getAssetsFile('icon_back_white.png')" @click="cancelFullScreen()" />
                 </div>
-            </div>
-        </div>
-        <div class="ad" v-if="data.ad1List && data.ad1List.length > 0">
-            <img :src="data.ad1List[0].photo" @click="adClick(ad1List[0])" />
-            <img v-if="data.ad1List[1]" :src="data.ad1List[1].photo" @click="adClick(data.ad1List[1])" />
-        </div>
 
-        <div class="company" v-if="data.companies">
-            <div class="part-head">
-                <div></div>
-                <span>优质企业</span>
-                <span v-if="data.companies && data.companies.length > 0"
-                    >{{ 1 + data.currentCompany }}/{{ (data.companies && data.companies.length) || 0 }}</span
-                >
-            </div>
+                <div class="module">
+                    <div class="module-cell" v-for="(item, index) in data.modules" :key="index" @click="moduleClick(item)">
+                        <img :src="item.icon" />
+                        <span>{{ item.name }}</span>
+                    </div>
+                </div>
 
-            <div class="swiper-container-home-company">
-                <swiper
-                    :modules="[Autoplay, A11y]"
-                    :slides-per-view="1"
-                    :space-between="0"
-                    :autoplay="{ delay: 3000, stopOnLastSlide: false, disableOnInteraction: false }"
-                    :loop="true"
-                    @swiper="onCompanySwiper"
-                    @slideChange="onCompanySlideChange"
-                    @click="onCompanyClick"
-                >
-                    <swiper-slide v-for="(item, index) in data.companies" :key="index">
-                        <div class="company-item">
-                            <img :src="item.photo" />
-                            <div>
-                                <span class="company-name"> {{ item.name }}</span>
-                                <div class="company-tags">
-                                    <span v-for="(tag, i) in item.tags" :key="i">{{ tag }}</span>
+                <div class="hot" v-if="data.adHot">
+                    <div class="part-head">
+                        <div></div>
+                        <span>赣动热点</span>
+                    </div>
+                    <div class="hot-video-container" :style="{ height: data.hotVideoHeight }" id="hotvideocontainer">
+                        <div id="video_hot" style="flex-shrink: 0" ref="hotplayer"></div>
+
+                        <div class="video-full-back" v-if="data.temp.isFullScreen">
+                            <img :src="getAssetsFile('icon_back_white.png')" @click="cancelFullScreen()" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ad" v-if="data.ad1List && data.ad1List.length > 0">
+                    <img :src="data.ad1List[0].photo" @click="adClick(ad1List[0])" />
+                    <img v-if="data.ad1List[1]" :src="data.ad1List[1].photo" @click="adClick(data.ad1List[1])" />
+                </div>
+
+                <div class="company" v-if="data.companies">
+                    <div class="part-head">
+                        <div></div>
+                        <span>优质企业</span>
+                        <span v-if="data.companies && data.companies.length > 0"
+                            >{{ 1 + data.currentCompany }}/{{ (data.companies && data.companies.length) || 0 }}</span
+                        >
+                    </div>
+
+                    <div class="swiper-container-home-company">
+                        <swiper
+                            :modules="[Autoplay, A11y]"
+                            :slides-per-view="1"
+                            :space-between="0"
+                            :autoplay="{ delay: 3000, stopOnLastSlide: false, disableOnInteraction: false }"
+                            :loop="true"
+                            @swiper="onCompanySwiper"
+                            @slideChange="onCompanySlideChange"
+                            @click="onCompanyClick"
+                        >
+                            <swiper-slide v-for="(item, index) in data.companies" :key="index">
+                                <div class="company-item">
+                                    <img :src="item.photo" />
+                                    <div>
+                                        <span class="company-name"> {{ item.name }}</span>
+                                        <div class="company-tags">
+                                            <span v-for="(tag, i) in item.tags" :key="i">{{ tag }}</span>
+                                        </div>
+                                    </div>
                                 </div>
+                            </swiper-slide>
+                        </swiper>
+                    </div>
+                </div>
+                <div class="ad" v-if="data.ad2List && data.ad2List.length > 0">
+                    <img :src="data.ad2List[0].photo" @click="adClick(ad2List[0])" />
+                    <img v-if="data.ad2List[1]" :src="data.ad2List[1].photo" @click="adClick(data.ad2List[1])" />
+                </div>
+
+                <van-tabs
+                    v-model:active="data.currentPage"
+                    @change="tabClick"
+                    swipeable
+                    shrink
+                    sticky
+                    offset-top="50"
+                    v-if="data.tabs && data.tabs.length > 0"
+                >
+                    <van-tab v-for="(tab, page) in data.tabs" :title="tab.name">
+                        <div class="news" v-if="page == data.currentPage">
+                            <div class="news-list" v-if="!tab.noData">
+                                <div class="news-container">
+                                    <NewsItem
+                                        v-for="(item, index) in tab.list"
+                                        :key="index"
+                                        :item="item"
+                                        :page="page"
+                                        :index="index"
+                                        @itemClick="newsItemClick"
+                                    ></NewsItem>
+                                </div>
+                                <div class="news-reloading" v-if="tab.isReloading">
+                                    <img :src="getAssetsFile('icon_loading_circle.gif')" style="width: 30px; height: 30px" />
+                                </div>
+                                <!-- <div class="news-loadingMore" v-if="tab.isLoadingMore">
+                                    <img :src="getAssetsFile('icon_loading_circle.gif')" />
+                                    <p>正在加载...</p>
+                                </div>
+                                <div class="news-nomore" v-if="tab.isNoMoreShow">已无更多</div> -->
+                            </div>
+
+                            <div class="news-none" v-if="tab.noData">
+                                <img :src="getAssetsFile('common/icon_data_empty.png')" />
+                                <p>暂无相关数据</p>
                             </div>
                         </div>
-                    </swiper-slide>
-                </swiper>
-            </div>
-        </div>
-        <div class="ad" v-if="data.ad2List && data.ad2List.length > 0">
-            <img :src="data.ad2List[0].photo" @click="adClick(ad2List[0])" />
-            <img v-if="data.ad2List[1]" :src="data.ad2List[1].photo" @click="adClick(data.ad2List[1])" />
-        </div>
-
-        <!-- <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-  <van-list
-    v-model:loading="loading"
-    :finished="finished"
-    finished-text="没有更多了"
-    @load="onLoad"
-  >
-    <van-cell v-for="item in list" :key="item" :title="item" />
-  </van-list>
-</van-pull-refresh> -->
-        <van-tabs v-model:active="data.currentPage" @change="tabClick" swipeable shrink v-if="data.tabs && data.tabs.length > 0">
-            <van-tab v-for="(tab, page) in data.tabs" :title="tab.name">
-                <div class="news" v-if="page == data.currentPage">
-                    <div class="news-list" v-if="!tab.noData">
-                        <div class="news-container">
-                            <!-- <portal-news-item
-                        *ngFor="let item of tab.list; let index = index"
-                        [item]="item"
-                        [page]="page"
-                        [index]="index"
-                        (itemClick)="newsItemClick($event)"
-                    >
-                    </portal-news-item> -->
-                            <NewsItem
-                                v-for="(item, index) in tab.list"
-                                :key="index"
-                                :item="item"
-                                :page="page"
-                                :index="index"
-                                @itemClick="newsItemClick"
-                            ></NewsItem>
-                        </div>
-                        <div class="news-reloading" v-if="tab.isReloading">
-                            <img :src="getAssetsFile('icon_loading_circle.gif')" style="width: 30px; height: 30px" />
-                        </div>
-                        <div class="news-loadingMore" v-if="tab.isLoadingMore">
-                            <img :src="getAssetsFile('icon_loading_circle.gif')" />
-                            <p>正在加载...</p>
-                        </div>
-                        <div class="news-nomore" v-if="tab.isNoMoreShow">已无更多</div>
-                    </div>
-
-                    <div class="news-none" v-if="tab.noData">
-                        <img :src="getAssetsFile('common/icon_data_empty.png')" />
-                        <p>暂无相关数据</p>
-                    </div>
-                </div>
-            </van-tab>
-        </van-tabs>
-
+                    </van-tab>
+                </van-tabs>
+            </van-list>
+        </van-pull-refresh>
         <div style="width: 100%; height: 56px; flex-shrink: 0"></div>
     </div>
 
@@ -167,8 +160,8 @@ export default {
 </script>
 
 <script setup>
-import { ref, reactive, getCurrentInstance, onMounted, onActivated, onDeactivated, onUnmounted } from 'vue'
-import { Toast, Tab, Tabs } from 'vant'
+import { ref, reactive, getCurrentInstance, onMounted, onActivated, onDeactivated, onUnmounted, computed } from 'vue'
+import { Toast } from 'vant'
 import DPlayer from 'dplayer'
 import Tabbar from '../../components/Tabbar.vue'
 import NewsItem from '../news/NewsItem.vue'
@@ -194,6 +187,63 @@ import 'swiper/css/autoplay'
 
 const { proxy } = getCurrentInstance()
 const defaultCity = '江西省工商联'
+
+const refreshing = ref(false)
+
+const onReachBottom = () => {
+    console.log('onReachBottom')
+
+    let index = data.currentPage
+    if (data.tabs && data.tabs.length > 0 && index <= data.tabs.length) {
+        let tab = data.tabs[index]
+        //正在加载更多且当前已达最大数量则不再加载
+        if (tab.isReloading || tab.isLoadingMore || (tab.totalCount && tab.list.length >= tab.totalCount)) return
+        loadNews(index)
+    }
+}
+
+const loading = computed({
+    get() {
+        let flag = false
+
+        let index = data.currentPage
+
+        if (data.tabs && data.tabs.length > 0 && index <= data.tabs.length) {
+            let tab = data.tabs[index]
+            flag = tab.isLoadingMore
+        }
+        return flag
+    },
+    // setter
+    set(newValue) {},
+})
+
+const finished = computed({
+    get() {
+        let flag = false
+
+        let index = data.currentPage
+
+        if (data.tabs && data.tabs.length > 0 && index <= data.tabs.length) {
+            let tab = data.tabs[index]
+            flag = tab.isNoMoreShow
+        }
+        return flag
+    },
+    // setter
+    set(newValue) {},
+})
+const onRefresh = () => {
+    // 清空列表数据
+    // finished.value = false
+
+    if (data.temp.isReloading) {
+        refreshing.value = false
+        return
+    }
+    data.temp.refreshMode = 2
+    reload()
+}
 
 const defaultModules = [
     { name: '商联头条', icon: getAssetsFile('home/icon_app_gstt.png'), page: 'gsdl://gstt' },
@@ -294,7 +344,7 @@ const reload = () => {
         data.selectedCity = lastSelectedCity
     }
 
-    showLoading()
+    if (data.temp.refreshMode == 1) showLoading()
 
     // let organization = this.localStorage.get('organization') || environment.organization
     let organization = getOrganization()
@@ -372,7 +422,7 @@ const queryFinish = () => {
             hideLoading()
             break
         case 2:
-            // wx.stopPullDownRefresh() //停止下拉刷新
+            refreshing.value = false //停止下拉刷新
             break
     }
     data.temp.isReloading = false
@@ -437,7 +487,8 @@ const initShareInfo = (zone) => {
 
 const fetch = (zone) => {
     // this.showLoading()
-    showLoading()
+
+    if (data.temp.refreshMode == 1) showLoading()
 
     zoneService
         .fetch(zone.id, zone.organization.id)
