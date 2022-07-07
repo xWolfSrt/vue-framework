@@ -9,23 +9,23 @@
             <img class="arrow" [src]="spa('common/icon_next.png')" />
         </div> -->
             <div>
-                <p>联系客服</p>
+                <span>联系客服</span>
                 <a :href="contactPhone ? 'tel:' + contactPhone : ''">{{ contactPhone || '' }}</a>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
             <div class="unable">
-                <p>当前版本</p>
-                <p>{{ appVersionName || '1.0.0' }}</p>
+                <span>当前版本</span>
+                <span>{{ appVersionName || '1.0.0' }}</span>
             </div>
 
             <div @click="userAgreementClick()">
-                <p>用户服务协议</p>
-                <p></p>
+                <span>用户服务协议</span>
+                <span></span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
             <div @click="privacyPolicyClick()">
-                <p>隐私政策</p>
-                <p></p>
+                <span>隐私政策</span>
+                <span></span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
         </div>
@@ -145,13 +145,13 @@ const hideLoading = () => {
             &.unable:active {
                 background-color: transparent;
             }
-            p:nth-child(1) {
+            span:nth-child(1) {
                 font-size: 16px;
                 flex-grow: 1;
                 text-align: left;
             }
 
-            p:nth-child(2),
+            span:nth-child(2),
             a {
                 font-size: 16px;
                 flex-grow: 1;

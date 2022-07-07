@@ -176,7 +176,7 @@ const authExpire = (callback, args, result) => {
     let token = storage.get('token')
     //如果报401，则刷新token，否则跳转到登录页面
     if (token && token.refresh_token) {
-        let url = `/live/api/refresh`
+        let url = `/gateway/api/refresh`
         console.log(url)
 
         //如果是刷新token的时候报401，则说明refreshtoken已过期，不继续刷新token

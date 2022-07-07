@@ -38,10 +38,12 @@ export default defineConfig({
     },
     //  生产环境
     build: {
-        //指定输出路径
+        // 指定输出路径
         assetsDir: './',
         // 指定输出文件路径
         outDir: 'dist',
+        // 块大小警告的限制（以 kbs 为单位）
+        chunkSizeWarningLimit: 1500,
         // 代码压缩配置
         terserOptions: {
             // 生产环境移除console
@@ -52,9 +54,9 @@ export default defineConfig({
         },
         rollupOptions: {
             output: {
-                chunkFileNames: 'static/js/[name]-[hash].js',
-                entryFileNames: 'static/js/[name]-[hash].js',
-                assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+                chunkFileNames: 'assets/js/[name]-[hash].js',
+                entryFileNames: 'assets/js/[name]-[hash].js',
+                assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
             },
         },
     },

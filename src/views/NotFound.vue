@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <img src="../assets/images/common/icon_data_empty.png" />
-        <p>找不到页面了~</p>
+        <span>找不到页面了~</span>
         <div>
             <button class="confirm btn btn-lg btn-gradient btn-gradient-shadow" @click="back">返回上一页</button>
             <button class="confirm btn btn-lg btn-gradient-red btn-gradient-red-shadow" @click="confirm">回到首页</button>
@@ -39,7 +39,7 @@ const confirm = () => {
         height: 216px;
     }
 
-    p {
+    span {
         color: #616b7a;
         font-size: 15px;
         line-height: 24px;

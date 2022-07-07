@@ -4,28 +4,28 @@
         <div style="width: 100%; height: 50px; flex-shrink: 0"></div>
         <div class="list" v-if="data.account">
             <div class="item">
-                <p>头像</p>
+                <span>头像</span>
                 <van-uploader preview-size="45" :max-count="1" :after-read="afterRead" accept="image/png, image/jpeg">
                     <img class="photo" :src="data.account.photo || getAssetsFile('common/profile_photo.png')" />
                 </van-uploader>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
             <div class="item" @click="nickClick()">
-                <p>名称</p>
-                <p>{{ data.account.name || '未设置' }}</p>
+                <span>名称</span>
+                <span>{{ data.account.name || '未设置' }}</span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
             <div class="item" @click="sexClick()">
-                <p>性别</p>
-                <p>{{ data.account.sex || '未设置' }}</p>
+                <span>性别</span>
+                <span>{{ data.account.sex || '未设置' }}</span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
             <div class="item unable">
-                <p>手机号码</p>
-                <p>{{ data.account.mobile || '未设置' }}</p>
+                <span>手机号码</span>
+                <span>{{ data.account.mobile || '未设置' }}</span>
             </div>
             <div class="item" @click="qrcodeClick()">
-                <p>我的二维码</p>
+                <span>我的二维码</span>
                 <img class="qrcode" :src="getAssetsFile('mine/icon_qcode.png')" />
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
@@ -177,13 +177,13 @@ const afterRead = (file) => {
                 background-color: transparent;
             }
 
-            p:nth-of-type(1) {
+            span:nth-of-type(1) {
                 font-size: 16px;
                 flex-grow: 1;
                 text-align: left;
             }
 
-            p:nth-of-type(2) {
+            span:nth-of-type(2) {
                 font-size: 16px;
                 flex-grow: 1;
                 color: #bdbdbd;

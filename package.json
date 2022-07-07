@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "dplayer": "^1.26.0",
+    "hls.js": "^1.1.5",
+    "swiper": "^7.4.1",
     "vant": "^3.5.1",
     "vue": "^3.2.25",
     "vue-router": "^4.0.13"

@@ -11,7 +11,7 @@
         </div>
         <div class="webview-dialog-none" v-if="!url">
             <img :src="getAssetsFile('common/icon_data_empty.png')" />
-            <p>这里没有内容</p>
+            <span>这里没有内容</span>
         </div>
     </div>
 </template>
@@ -160,7 +160,7 @@ defineExpose({
             height: 216px;
         }
 
-        p {
+        span {
             color: #616b7a;
             font-size: 15px;
             line-height: 24px;
