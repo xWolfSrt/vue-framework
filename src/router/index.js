@@ -37,6 +37,10 @@ const routes = [
         component: () => import('@/views/home/HomeSearch.vue'),
     },
     {
+        path: '/news/details',
+        component: () => import('@/views/news/NewsDetails.vue'),
+    },
+    {
         path: '/live',
         component: () => import('@/views/live/Live.vue'),
     },

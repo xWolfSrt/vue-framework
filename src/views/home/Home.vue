@@ -1090,6 +1090,12 @@ const queryErrorNews = (index) => {
 
 const newsItemClick = (event) => {
     console.log(event)
+    proxy.$router.push({
+        path: '/news/details',
+        query: {
+            id: event.item.id,
+        },
+    })
 }
 const initCategoryList = () => {
     data.categoryList = []
