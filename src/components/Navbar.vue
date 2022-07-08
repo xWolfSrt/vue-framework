@@ -15,7 +15,7 @@
     </div>
 </template>
 <script setup>
-import { ref, reactive, getCurrentInstance, defineProps, defineEmits, onMounted } from 'vue'
+import { ref, reactive, getCurrentInstance, onMounted } from 'vue'
 import getAssetsFile from '../utils/pub-use'
 const { proxy } = getCurrentInstance()
 

@@ -150,6 +150,8 @@
     </div>
 
     <Tabbar code="home" @refresh="tabRefresh"></Tabbar>
+
+    <ZwLoading :background="data.loadingBg" ref="zwLoading" @errorTap="zwLoadingErrorTap"></ZwLoading>
 </template>
 
 <script>
@@ -165,6 +167,7 @@ import { Toast } from 'vant'
 import DPlayer from 'dplayer'
 import Tabbar from '../../components/Tabbar.vue'
 import NewsItem from '../news/NewsItem.vue'
+import ZwLoading from '../../components/ZwLoading.vue'
 import getAssetsFile from '../../utils/pub-use'
 import zoneService from '../../api/zone'
 import newsService from '../../api/news'
@@ -188,6 +191,8 @@ import 'swiper/css/autoplay'
 const { proxy } = getCurrentInstance()
 const defaultCity = '江西省工商联'
 
+const zwLoading = ref(null)
+
 const refreshing = ref(false)
 
 const onReachBottom = () => {
@@ -201,7 +206,7 @@ const onReachBottom = () => {
         loadNews(index)
     }
 }
-
+//是否加载更多
 const loading = computed({
     get() {
         let flag = false
@@ -234,9 +239,6 @@ const finished = computed({
     set(newValue) {},
 })
 const onRefresh = () => {
-    // 清空列表数据
-    // finished.value = false
-
     if (data.temp.isReloading) {
         refreshing.value = false
         return
@@ -328,7 +330,7 @@ const updateHotVideoHeight = () => {
 }
 const searchClick = () => {}
 const reloadFull = (isRefresh = false) => {
-    // this.loadingBg = isRefresh ? 'transparent' : 'white'
+    data.loadingBg = isRefresh ? 'transparent' : 'white'
     data.temp.refreshMode = 1
     reload()
 }
@@ -344,8 +346,9 @@ const reload = () => {
         data.selectedCity = lastSelectedCity
     }
 
-    if (data.temp.refreshMode == 1) showLoading()
-
+    if (data.temp.refreshMode == 1) {
+        zwLoading.value.showLoading()
+    }
     // let organization = this.localStorage.get('organization') || environment.organization
     let organization = getOrganization()
     console.log(`current organization=${organization}`)
@@ -418,8 +421,7 @@ const queryFinish = () => {
     console.log('queryFinish')
     switch (data.temp.refreshMode) {
         case 1:
-            // this.zwLoading.hide()
-            hideLoading()
+            zwLoading.value.hide()
             break
         case 2:
             refreshing.value = false //停止下拉刷新
@@ -438,8 +440,7 @@ const queryError = (error) => {
         case 1:
             if (!data.temp.zoneView) {
                 data.loadingBg = 'white'
-                // this.zwLoading.showError()
-                hideLoading()
+                zwLoading.value.showError()
                 data.temp.zoneView = undefined
             } else {
                 Toast('网络异常')
@@ -447,7 +448,8 @@ const queryError = (error) => {
             }
             break
         case 2:
-            // wx.stopPullDownRefresh() //停止下拉刷新
+            Toast('网络异常')
+            refreshing.value = false //停止下拉刷新
             break
     }
     data.temp.isReloading = false
@@ -456,7 +458,9 @@ const queryEmpty = () => {
     queryFinish()
     temp.zoneView = undefined
 }
-
+const zwLoadingErrorTap = () => {
+    reloadFull()
+}
 const getOrganization = () => {
     let organization = proxy.$storage.get('organization')
     if (!organization) {
@@ -486,9 +490,9 @@ const initShareInfo = (zone) => {
 }
 
 const fetch = (zone) => {
-    // this.showLoading()
-
-    if (data.temp.refreshMode == 1) showLoading()
+    if (data.temp.refreshMode == 1) {
+        zwLoading.value.showLoading()
+    }
 
     zoneService
         .fetch(zone.id, zone.organization.id)

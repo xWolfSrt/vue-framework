@@ -29,8 +29,6 @@
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
         </div>
-        <span>{{ count }}</span>
-        <button @click="count += 1">+1</button>
         <button v-if="isCurrentLogin" class="confirm btn btn-lg btn-circle btn-gradient btn-gradient-shadow" @click="loginOut()">
             退出登录
         </button>
@@ -47,7 +45,6 @@ import config from '../../config'
 import userService from '../../api/user'
 const { proxy } = getCurrentInstance()
 
-const count = ref(0)
 const appVersionName = ref('')
 const contactPhone = ref(config.contactPhone)
 const isCurrentLogin = ref(false)

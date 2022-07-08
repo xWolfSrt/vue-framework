@@ -3,6 +3,7 @@
         <img class="navback" v-if="!isWXShare" :src="getAssetsFile('icon_back.png')" @click="navbarBack" />
         <span>资讯详情</span>
         <img
+            v-if="!isZwLoadingShow"
             class="favorite"
             :src="data.item.favorite ? getAssetsFile('common/icon_favorite_on.png') : getAssetsFile('common/icon_favorite_off.png')"
             :click="favoriteClick"
@@ -30,15 +31,18 @@
             </div>
         </div>
     </div>
+    <ZwLoading ref="zwLoading" @errorTap="zwLoadingErrorTap"></ZwLoading>
 </template>
 <script setup>
-import { ref, reactive, getCurrentInstance, defineProps, onMounted } from 'vue'
+import { ref, reactive, getCurrentInstance, onMounted, computed } from 'vue'
 import { Toast, ImagePreview } from 'vant'
 import getAssetsFile from '../../utils/pub-use'
 import { useRouter } from 'vue-router'
 import newsService from '../../api/news'
 import pictureService from '../../utils/picture-service'
 import dateService from '../../utils/date-service'
+import ZwLoading from '../../components/ZwLoading.vue'
+
 const { proxy } = getCurrentInstance()
 const router = useRouter()
 const isWXShare = ref(false)
@@ -48,6 +52,15 @@ const data = reactive({
     temp: {},
     editor: undefined,
     previewImgList: [],
+})
+const zwLoading = ref(null)
+const isZwLoadingShow = computed({
+    get() {
+        let tag = zwLoading && zwLoading.value && zwLoading.value.isShow()
+        console.log('``````````````', tag)
+        return tag
+    },
+    set(value) {},
 })
 onMounted(() => {
     console.log(router)
@@ -61,12 +74,13 @@ const navbarBack = () => {
 const favoriteClick = () => {}
 const reload = () => {
     data.temp.isReloading = true
-    showLoading()
 
+    zwLoading.value.showLoading()
     newsService
         .fetch(data.id)
         .then((result) => {
-            if (!result) {
+            console.log(result)
+            if (!result || !result.information) {
                 reloadEmpty()
                 return
             }
@@ -105,17 +119,20 @@ const disposeResult = (result) => {
 
 const reloadEmpty = () => {
     data.isDataEmpty = true
-    Toast('您查看的资讯找不到了~')
+    zwLoading.value.showEmpty('您查看的资讯找不到了~')
 }
 const reloadError = () => {
-    hideLoading()
-    // this.zwLoading.showError()
+    // hideLoading()
+    zwLoading.value.showError()
 }
 const reloadFinish = () => {
     data.temp.isReloading = false
-    hideLoading()
+    // hideLoading()
+    zwLoading.value.hide()
 }
-
+const loadingErrorTap = () => {
+    reload()
+}
 const initMarkdown = () => {
     console.log(window.editormd)
     // //清空之前的内容
