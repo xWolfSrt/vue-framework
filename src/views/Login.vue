@@ -45,17 +45,17 @@
         </div>
         <div class="tips">
             <span>未注册的手机号码验证后自动注册</span>
-            <!-- <span (click)="switchMode()">{{ isAccountMode ? '手机号码登录' : '账号密码登录' }}</span> -->
+            <!-- <span (click)="switchMode">{{ isAccountMode ? '手机号码登录' : '账号密码登录' }}</span> -->
         </div>
         <button class="next btn btn-lg btn-gradient" @click="login">登录 / 注册</button>
         <div class="agreement-block"></div>
         <div class="agreement">
-            <!-- <img (click)="agreementClick()" [src]="isAgree ? spa('common/icon_check_on.png') : spa('common/icon_check_off.png')" /> -->
+            <!-- <img (click)="agreementClick" [src]="isAgree ? spa('common/icon_check_on.png') : spa('common/icon_check_off.png')" /> -->
             <p>
-                <span @click="agreementClick()">登录注册表示同意</span>
-                <span @click="userAgreementClick()">用户服务协议</span>
+                <span @click="agreementClick">登录注册表示同意</span>
+                <span @click="userAgreementClick">用户服务协议</span>
                 <span>、</span>
-                <span @click="privacyPolicyClick()">隐私政策</span>
+                <span @click="privacyPolicyClick">隐私政策</span>
             </p>
         </div>
     </div>

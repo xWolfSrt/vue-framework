@@ -62,17 +62,17 @@ const confirm = () => {
             font-size: 15px;
             margin: 0 12px;
 
-            position: relative;
-            line-height: normal;
-            border: none;
-            outline: 0;
-            color: #fff;
-            background: 0 0;
-            box-shadow: none;
-            text-align: center;
-            -webkit-appearance: none;
-            white-space: nowrap;
-            box-sizing: border-box;
+            // position: relative;
+            // line-height: normal;
+            // border: none;
+            // outline: 0;
+            // color: #fff;
+            // background: 0 0;
+            // box-shadow: none;
+            // text-align: center;
+            // -webkit-appearance: none;
+            // white-space: nowrap;
+            // box-sizing: border-box;
 
             &:nth-of-type(1) {
                 margin-left: 24px;
@@ -81,49 +81,49 @@ const confirm = () => {
                 margin-right: 24px;
             }
 
-            &.btn-lg {
-                font-size: 16px;
-                height: 45px;
-                line-height: 45px;
-            }
+            // &.btn-lg {
+            //     font-size: 16px;
+            //     height: 45px;
+            //     line-height: 45px;
+            // }
 
-            &.btn-circle {
-                border-radius: 100px;
-            }
+            // &.btn-circle {
+            //     border-radius: 100px;
+            // }
 
-            &.btn:disabled {
-                opacity: 0.4;
-            }
+            // &.btn:disabled {
+            //     opacity: 0.4;
+            // }
 
-            /* 不适用于底部按钮 */
-            &.btn-gradient-shadow {
-                // box-shadow: 0px 8px 16px rgba(236, 71, 86, 0.3);
-                box-shadow: 0px 8px 16px rgba(109, 202, 109, 0.2);
-            }
-            &.btn-gradient-red-shadow {
-                box-shadow: 0px 8px 16px rgba(251, 66, 101, 0.2);
-            }
+            // /* 不适用于底部按钮 */
+            // &.btn-gradient-shadow {
+            //     // box-shadow: 0px 8px 16px rgba(236, 71, 86, 0.3);
+            //     box-shadow: 0px 8px 16px rgba(109, 202, 109, 0.2);
+            // }
+            // &.btn-gradient-red-shadow {
+            //     box-shadow: 0px 8px 16px rgba(251, 66, 101, 0.2);
+            // }
 
-            &.btn-gradient-shadow-bottom {
-                // box-shadow: 0px -5px 16px rgba(251, 66, 101, 0.3);
-                box-shadow: 0px -5px 16px rgba(109, 202, 109, 0.2);
-            }
+            // &.btn-gradient-shadow-bottom {
+            //     // box-shadow: 0px -5px 16px rgba(251, 66, 101, 0.3);
+            //     box-shadow: 0px -5px 16px rgba(109, 202, 109, 0.2);
+            // }
 
-            &.btn-gradient {
-                background: linear-gradient(90deg, #3fbf3f, #6dca6d);
-            }
+            // &.btn-gradient {
+            //     background: linear-gradient(90deg, #3fbf3f, #6dca6d);
+            // }
 
-            &.btn-gradient:active {
-                background: linear-gradient(90deg, #3dc43d, #6fd46f);
-            }
+            // &.btn-gradient:active {
+            //     background: linear-gradient(90deg, #3dc43d, #6fd46f);
+            // }
 
-            &.btn-gradient-red {
-                background: linear-gradient(90deg, rgba(251, 66, 101, 1) 0%, rgba(255, 120, 67, 1) 100%);
-            }
+            // &.btn-gradient-red {
+            //     background: linear-gradient(90deg, rgba(251, 66, 101, 1) 0%, rgba(255, 120, 67, 1) 100%);
+            // }
 
-            &.btn-gradient-red:active {
-                background: linear-gradient(90deg, rgba(245, 55, 91, 1) 0%, rgba(248, 110, 55, 1) 100%);
-            }
+            // &.btn-gradient-red:active {
+            //     background: linear-gradient(90deg, rgba(245, 55, 91, 1) 0%, rgba(248, 110, 55, 1) 100%);
+            // }
         }
     }
 }

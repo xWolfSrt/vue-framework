@@ -52,26 +52,26 @@
                     <span>{{ data.account.name || data.account.nick }}</span>
                     <div>
                         <span>认证未通过</span>
-                        <span @click="authDenyClick()">查看</span>
+                        <span @click="authDenyClick">查看</span>
                     </div>
                 </div>
             </div>
             <div class="wallet">
-                <div class="wallet-item" @click="balanceClick()">
+                <div class="wallet-item" @click="balanceClick">
                     <span :class="{ none: !data.account }">{{ (data.account && data.account.balance) || '—— ——' }}</span>
                     <div>
                         <span>余额</span>
                         <span>(元)</span>
                     </div>
                 </div>
-                <div class="wallet-item" @click="pointClick()">
+                <div class="wallet-item" @click="pointClick">
                     <span :class="{ none: !data.account }">{{ (data.account && data.account.point) || '—— ——' }}</span>
                     <div>
                         <span>积分</span>
                     </div>
                 </div>
             </div>
-            <div class="auth" @click="authClick()">
+            <div class="auth" @click="authClick">
                 <img :src="getAssetsFile('mine/bg_auth.png')" />
                 <div>
                     <img :src="getAssetsFile('mine/icon_auth.png')" />
@@ -84,27 +84,27 @@
                     }}</span>
                 </div>
             </div>
-            <img class="settings" :src="getAssetsFile('mine/icon_settings.png')" @click="settingsClick()" />
+            <img class="settings" :src="getAssetsFile('mine/icon_settings.png')" @click="settingsClick" />
         </div>
 
         <div class="rz">
             <div class="head">
                 <span>我的融资</span>
-                <div class="car" @click="directClick()">
+                <div class="car" @click="directClick">
                     <img :src="getAssetsFile('mine/icon_car.gif')" />
                     <span v-if="data.account && data.account.direct">{{ data.account && data.account.direct }}</span>
                 </div>
             </div>
             <div class="menu">
-                <div @click="authClick()">
+                <div @click="authClick">
                     <img :src="getAssetsFile('mine/icon_information.png')" />
                     <span>我的资料</span>
                 </div>
-                <div @click="recordClick()">
+                <div @click="recordClick">
                     <img :src="getAssetsFile('mine/icon_apply.png')" />
                     <span>我的申请</span>
                 </div>
-                <div @click="favoriteClick()">
+                <div @click="favoriteClick">
                     <img :src="getAssetsFile('mine/icon_favorite.png')" />
                     <span>我的关注</span>
                 </div>

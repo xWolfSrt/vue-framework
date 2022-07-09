@@ -2,7 +2,7 @@
     <div
         class="zw-loading"
         v-if="show"
-        @click.stop="bgTap()"
+        @click.stop="bgTap"
         :style="{
             background: background || '#FFF',
             bottom: bottom || 0,
@@ -21,7 +21,7 @@
             <span>{{ data.errorText || '您的网络好像不太给力' }}</span>
             <button
                 class="btn btn-lg btn-gradient btn-gradient-shadow"
-                @click="errorTap()"
+                @click="errorTap"
                 :style="{ 'margin-bottom': data.hideErorIcon ? '0' : '.8rem' }"
             >
                 {{ data.errorBtnText || '重新加载' }}

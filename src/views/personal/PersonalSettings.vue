@@ -3,7 +3,7 @@
     <div class="personal-settings-container">
         <div style="width: 100%; height: 50px; flex-shrink: 0"></div>
         <div class="list">
-            <!-- <div (click)="opinion()">
+            <!-- <div (click)="opinion">
             <p>意见反馈</p>
             <p></p>
             <img class="arrow" [src]="spa('common/icon_next.png')" />
@@ -18,18 +18,18 @@
                 <span>{{ appVersionName || '1.0.0' }}</span>
             </div>
 
-            <div @click="userAgreementClick()">
+            <div @click="userAgreementClick">
                 <span>用户服务协议</span>
                 <span></span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
-            <div @click="privacyPolicyClick()">
+            <div @click="privacyPolicyClick">
                 <span>隐私政策</span>
                 <span></span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
         </div>
-        <button v-if="isCurrentLogin" class="confirm btn btn-lg btn-circle btn-gradient btn-gradient-shadow" @click="loginOut()">
+        <button v-if="isCurrentLogin" class="confirm btn btn-lg btn-circle btn-gradient btn-gradient-shadow" @click="loginOut">
             退出登录
         </button>
     </div>

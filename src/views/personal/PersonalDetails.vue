@@ -10,12 +10,12 @@
                 </van-uploader>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
-            <div class="item" @click="nickClick()">
+            <div class="item" @click="nickClick">
                 <span>名称</span>
                 <span>{{ data.account.name || '未设置' }}</span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
             </div>
-            <div class="item" @click="sexClick()">
+            <div class="item" @click="sexClick">
                 <span>性别</span>
                 <span>{{ data.account.sex || '未设置' }}</span>
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />
@@ -24,7 +24,7 @@
                 <span>手机号码</span>
                 <span>{{ data.account.mobile || '未设置' }}</span>
             </div>
-            <div class="item" @click="qrcodeClick()">
+            <div class="item" @click="qrcodeClick">
                 <span>我的二维码</span>
                 <img class="qrcode" :src="getAssetsFile('mine/icon_qcode.png')" />
                 <img class="arrow" :src="getAssetsFile('common/icon_next.png')" />

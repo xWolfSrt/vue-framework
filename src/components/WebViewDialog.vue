@@ -1,10 +1,10 @@
 <template>
-    <div class="webview-dialog-mask" :class="{ show: isAnimShow }" v-if="isShow" @click="hide()"></div>
+    <div class="webview-dialog-mask" :class="{ show: isAnimShow }" v-if="isShow" @click="hide"></div>
     <div class="webview-dialog" :class="{ show: isAnimShow }" v-if="isShow">
         <div class="webview-dialog-head">
-            <img class="webview-dialog-back" @click="hide()" :src="getAssetsFile('icon_back.png')" />
+            <img class="webview-dialog-back" @click="hide" :src="getAssetsFile('icon_back.png')" />
             <span>{{ title }}</span>
-            <!-- <img class="filter-close" [src]="spa('gszj/common/icon_close.png')" (click)="hideFilter()" /> -->
+            <!-- <img class="filter-close" [src]="spa('gszj/common/icon_close.png')" (click)="hideFilter" /> -->
         </div>
         <div class="webview-dialog-content" v-if="url">
             <iframe :src="url" frameborder="0" name="iframe" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>

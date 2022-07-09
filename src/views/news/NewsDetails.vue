@@ -202,7 +202,9 @@ const previewPhotoClick = (index) => {
         startPosition: index,
     })
 }
-
+const zwLoadingErrorTap = () => {
+    reload()
+}
 const showLoading = (content) => {
     Toast.loading({
         duration: 0,

@@ -1,14 +1,14 @@
 <template>
     <div class="container">
         <div class="search-container" v-if="data.selectedCity && data.temp.zoneView">
-            <div class="city" @click="cityClick()">
+            <div class="city" @click="cityClick">
                 <span>{{ data.selectedCity || '' }}</span>
                 <div v-if="data.zoneList.length > 0"></div>
             </div>
-            <div class="search" @click="searchClick()">
+            <div class="search" @click="searchClick">
                 <img :src="getAssetsFile('home/icon_home_search.png')" />
             </div>
-            <div class="scan" @click="scanClick()">
+            <div class="scan" @click="scanClick">
                 <img :src="getAssetsFile('home/icon_home_scan.png')" />
             </div>
         </div>
@@ -57,7 +57,7 @@
                         <div id="video_hot" style="flex-shrink: 0" ref="hotplayer"></div>
 
                         <div class="video-full-back" v-if="data.temp.isFullScreen">
-                            <img :src="getAssetsFile('icon_back_white.png')" @click="cancelFullScreen()" />
+                            <img :src="getAssetsFile('icon_back_white.png')" @click="cancelFullScreen" />
                         </div>
                     </div>
                 </div>
