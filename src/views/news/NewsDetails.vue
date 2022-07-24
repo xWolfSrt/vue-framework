@@ -6,7 +6,7 @@
             v-if="!isZwLoadingShow"
             class="favorite"
             :src="data.item.favorite ? getAssetsFile('common/icon_favorite_on.png') : getAssetsFile('common/icon_favorite_off.png')"
-            :click="favoriteClick"
+            @click="favoriteClick"
             :style="{ right: '12px' }"
         />
     </div>
